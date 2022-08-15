@@ -4,7 +4,7 @@ import '../App'
 
 
 
-const Sidebar = ({ onAddNote, onDeleteNote, notes }) => {
+const Sidebar = ({ onAddNote, onDeleteNote, notes, activeNote, setActiveNote }) => {
 
   return (
     <div className='app-sidebar'>
@@ -13,8 +13,12 @@ const Sidebar = ({ onAddNote, onDeleteNote, notes }) => {
             <button onClick={onAddNote}>追加</button>
         </div>
         <div className='app-sidebar-notes'>
-            {notes.map((note , i) => (
-                <div className='app-sidebar-note' key={note.id}>
+            {notes.map((note) => (
+                <div
+                   className={`app-sidebar-note ${note.id === activeNote && 'active'}`}
+                   key={note.id} 
+                   onClick={() => setActiveNote(note.id)}
+                >
                 <div className='sidebar-note-title'>
                     <strong>{note.title}</strong>
                     <button onClick={() => onDeleteNote(note.id)}>削除</button>
