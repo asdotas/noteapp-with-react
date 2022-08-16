@@ -14,7 +14,7 @@ const App = () => {
       id: uuid(),
       title: '新しいノート',
       content: '新しいノートの内容',
-      modDate: Date.now()
+      modDate: Date.now(),
     };
     setNotes([...notes, newNote]);
     console.log(notes);
@@ -23,6 +23,21 @@ const App = () => {
   const onDeleteNote = (id) => {
     const filterNotes = notes.filter((note) => note.id !== id);
     setNotes(filterNotes);
+  };
+
+  const getActiveNote = () => {
+    return notes.find((note) => note.id === activeNote);
+  };
+
+  const onUpdateNote = (updatedNote) => {
+    const updatedNotesArray = notes.map((note) => {
+      if (note.id === updatedNote.id){
+        return updatedNote;
+      } else {
+        return  note;
+      }   
+    });
+    setNotes(updatedNotesArray);
   };
 
   return (
@@ -34,7 +49,7 @@ const App = () => {
         activeNote={activeNote}
         setActiveNote={setActiveNote}
         />
-      <Main />
+      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote}  />
     </div>
   );
 }

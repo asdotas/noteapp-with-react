@@ -2,8 +2,6 @@ import React from 'react';
 import './Sidebar.css';
 import '../App'
 
-
-
 const Sidebar = ({ onAddNote, onDeleteNote, notes, activeNote, setActiveNote }) => {
 
   return (
